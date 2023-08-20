@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isShowing = false
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -12,7 +14,12 @@ struct ContentView: View {
                     .font(.system(size: 20))
                     .padding([.bottom], 20)
                 
-                NavigationLink("Next") { NextView() }
+                // Page Navigation
+//                NavigationLink("Next") { NextView() }
+//                    .padding([.bottom], 20)
+                
+                // Sheet View Navigation
+                Button("Text") { isShowing.toggle() }
                     .padding([.bottom], 20)
                 
                 List {
@@ -31,6 +38,12 @@ struct ContentView: View {
             }
             .padding()
         }
+        .sheet(isPresented: $isShowing) {
+            NextView()
+                .presentationCornerRadius(20)
+                .presentationDragIndicator(.visible)
+                .presentationDetents([.medium])
+        }
     }
 }
 
@@ -39,4 +52,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
- 
